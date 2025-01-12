@@ -9,7 +9,6 @@ create table Address
 	house_number varchar(4) not null,
 	additional varchar(128)
 );
-
 create table Client
 (
 	id int primary key auto_increment,
@@ -21,7 +20,6 @@ create table Client
 
 	foreign key (Address_id) references Address(id)
 );
-
 create table Bank
 (
 	id int primary key auto_increment,
@@ -29,8 +27,6 @@ create table Bank
 
 	foreign key (Address_id) references Address(id)
 );
-
-
 create table Account
 (
 	id int primary key auto_increment,
@@ -45,7 +41,6 @@ create table Account
 	foreign key (Client_id) references Client(id),
 	foreign key (Bank_id) references Bank(id)
 );
-
 create table Card
 (
 	id int primary key auto_increment,
@@ -54,10 +49,9 @@ create table Card
 	created_on datetime default current_timestamp,
 	expires_on datetime,
 
-	foreign key (Account_id) references Account(id),
+	foreign key (Account_id) references Account(id) on delete cascade,
 	check (expires_on > created_on)
 );
-
 create table Transaction
 (
 	id int primary key auto_increment,
@@ -65,20 +59,21 @@ create table Transaction
 	to_id int not null,
 	created_on datetime default current_timestamp,
 	amount decimal(16, 2) not null default 0 check(amount >= 0),
+	notes varchar(512),
 
-	foreign key (from_id) references Account(id),
-	foreign key (to_id) references Account(id)
+	foreign key (from_id) references Account(id) on delete cascade,
+	foreign key (to_id) references Account(id) on delete cascade
 );
 
 create view Client_Accounts as
 select first_name, last_name, email, client_number, account_number, account_type, is_frozen, created_on, balance from Client join Account on Client_id=Client.id;
 
 create view Transactions as
-select from_acc.account_number as from_account, to_acc.account_number as to_account, Transaction.amount, Transaction.created_on as took_place_on
+select from_acc.account_number as from_account, to_acc.account_number as to_account, Transaction.amount, Transaction.created_on as took_place_on, Transaction.notes as notes
 from Transaction join Account from_acc on Transaction.from_id = from_acc.id join Account to_acc on Transaction.to_id = to_acc.id;
 
 delimiter //
-create procedure Bank_Transfer(in from_account_number varchar(32), in to_account_number varchar(32), in amount decimal(16, 2))
+create procedure Bank_Transfer(in from_account_number varchar(32), in to_account_number varchar(32), in amount decimal(16, 2), in notes varchar(512))
 begin
 	declare from_id int default null;
 	declare to_id int default null;
@@ -89,7 +84,12 @@ begin
 
 	select id into from_id from Account where account_number = from_account_number;
 	select id into to_id from Account where account_number = to_account_number;
-	insert into Transaction (from_id, to_id, amount) values (from_id, to_id, amount);
+	insert into Transaction (from_id, to_id, amount, notes) values (from_id, to_id, amount, notes);
 	commit;
+end //
+
+create procedure Bank_Transfer_Without_Notes(in from_account_number varchar(32), in to_account_number varchar(32), in amount decimal(16, 2))
+begin
+	call Bank_Transfer(from_account_number, to_account_number, amount, null);
 end //
 delimiter ;
