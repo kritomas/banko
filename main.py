@@ -1,5 +1,5 @@
-from src import dbsingleton, config, clientdao
+from src import dbsingleton, config, addressdao, clientdao
 
-dao = clientdao.ClientDAO(0, 1, "kritomas", "xd", "kritomas@mail.com", "123456789")
+dao = addressdao.AddressDAO(0, "Ankh-Morkpork", "Palacum", "1", None)
 
-clientdao.ClientDAO.create(dao)
+addressdao.AddressDAO.create(dao)

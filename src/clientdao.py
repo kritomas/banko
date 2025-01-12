@@ -65,6 +65,8 @@ class ClientDAO:
 
 	@classmethod
 	def create(cls, obj):
+		if not isinstance(obj, ClientDAO):
+			raise TypeError()
 		sql = "insert into Client (Address_id, first_name, last_name, email, client_number) values (%s, %s, %s, %s, %s)"
 		values = (obj.address_id, obj.first_name, obj.last_name, obj.email, obj.client_number)
 		cursor = dbsingleton.DBSingleton().cursor()
@@ -92,6 +94,8 @@ class ClientDAO:
 		return result
 	@classmethod
 	def update(cls, obj):
+		if not isinstance(obj, ClientDAO):
+			raise TypeError()
 		sql = "update Client set Address_id=%s, first_name=%s, last_name=%s, email=%s, client_number=%s where id=%s"
 		values = (obj.address_id, obj.first_name, obj.last_name, obj.email, obj.client_number, obj.id)
 		cursor = dbsingleton.DBSingleton().cursor()
@@ -99,6 +103,8 @@ class ClientDAO:
 		dbsingleton.DBSingleton().commit()
 	@classmethod
 	def delete(cls, obj):
+		if not isinstance(obj, ClientDAO):
+			raise TypeError()
 		sql = "delete from Client where id=%s"
 		values = (obj.id, )
 		cursor = dbsingleton.DBSingleton().cursor()
