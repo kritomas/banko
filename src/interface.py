@@ -27,8 +27,8 @@ class Interface:
 					self.commands[cmd]()
 				else:
 					print("Unknown command")
-			#except KeyboardInterrupt:
-			#	print("Type \"exit\" to exit")
+			except KeyboardInterrupt:
+				print("Type \"exit\" to exit")
 			except EOFError:
 				self.active = False
 			except Exception as error:

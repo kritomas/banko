@@ -82,11 +82,18 @@ class ClientDAO:
 		result = cursor.fetchone()
 		return cls(result[0], result[1], result[2], result[3], result[4], result[5])
 	@classmethod
-	def readAll(cls):
-		sql = "select id, Address_id, first_name, last_name, email, client_number from Client"
-		values = (id,)
+	def readByClientNumber(cls, client_number):
+		sql = "select id, Address_id, first_name, last_name, email, client_number from Client where client_number=%s"
+		values = (client_number,)
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
+		result = cursor.fetchone()
+		return cls(result[0], result[1], result[2], result[3], result[4], result[5])
+	@classmethod
+	def readAll(cls):
+		sql = "select id, Address_id, first_name, last_name, email, client_number from Client"
+		cursor = dbsingleton.DBSingleton().cursor()
+		cursor.execute(sql)
 		bulk = cursor.fetchall()
 		result = []
 		for b in bulk:

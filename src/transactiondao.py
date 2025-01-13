@@ -85,9 +85,8 @@ class TransactionDAO:
 	@classmethod
 	def readAll(cls):
 		sql = "select id, from_id, to_id, created_on, amount, notes from Transaction"
-		values = (id,)
 		cursor = dbsingleton.DBSingleton().cursor()
-		cursor.execute(sql, values)
+		cursor.execute(sql)
 		bulk = cursor.fetchall()
 		result = []
 		for b in bulk:

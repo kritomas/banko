@@ -74,9 +74,8 @@ class AddressDAO:
 	@classmethod
 	def readAll(cls):
 		sql = "select id, city, street, house_number, additional from Address"
-		values = (id,)
 		cursor = dbsingleton.DBSingleton().cursor()
-		cursor.execute(sql, values)
+		cursor.execute(sql)
 		bulk = cursor.fetchall()
 		result = []
 		for b in bulk:

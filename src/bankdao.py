@@ -54,9 +54,8 @@ class BankDAO:
 	@classmethod
 	def readAll(cls):
 		sql = "select id, Address_id, name from Bank"
-		values = (id,)
 		cursor = dbsingleton.DBSingleton().cursor()
-		cursor.execute(sql, values)
+		cursor.execute(sql)
 		bulk = cursor.fetchall()
 		result = []
 		for b in bulk:

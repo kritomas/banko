@@ -8,6 +8,7 @@ class ClientInterface:
 		self.commands["help"] = self.help
 		self.commands["exit"] = self.exit
 		self.commands["register"] = self.register
+		self.commands["list"] = self.list
 
 	def exit(self):
 		self.active = False
@@ -15,6 +16,7 @@ class ClientInterface:
 		print("help: Display this")
 		print("exit: Exit")
 		print("register: Register new client")
+		print("list: List all clients")
 	def register(self):
 		print("Registering new client...")
 		first_name = input("First name: ")
@@ -28,6 +30,10 @@ class ClientInterface:
 			additional = None
 		c = client.Client.register(first_name, last_name, email, city, street, house_number, additional)
 		print("Registered new client with number", c.client_number)
+	def list(self):
+		clients = client.Client.list()
+		for c in clients:
+			print(c)
 
 	def start(self):
 		self.active = True
