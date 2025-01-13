@@ -1,3 +1,4 @@
+import decimal
 from src import account
 
 class AccountInterface:
@@ -9,6 +10,8 @@ class AccountInterface:
 		self.commands["exit"] = self.exit
 		self.commands["open"] = self.open
 		self.commands["list"] = self.list
+		self.commands["deposit"] = self.deposit
+		self.commands["withdraw"] = self.withdraw
 
 	def exit(self):
 		self.active = False
@@ -17,6 +20,8 @@ class AccountInterface:
 		print("exit: Exit")
 		print("open: Open new account")
 		print("list: List all accounts")
+		print("deposit: Deposit into account")
+		print("withdraw: Withdraw from account")
 	def open(self):
 		print("Opening new account...")
 		client_number = input("Number of owner: ")
@@ -28,6 +33,18 @@ class AccountInterface:
 		accounts = account.Account.list()
 		for a in accounts:
 			print(a)
+	def deposit(self):
+		print("Depositing $$$ into account...")
+		account_number = input("Number of account: ")
+		amount = decimal.Decimal(input("Amount to deposit: "))
+		account.Account.deposit(account_number, amount)
+		print("Deposited " + str(amount) + "$ into " + account_number)
+	def withdraw(self):
+		print("Withdrawing $$$ from account...")
+		account_number = input("Number of account: ")
+		amount = decimal.Decimal(input("Amount to withdraw: "))
+		account.Account.withdraw(account_number, amount)
+		print("Withdrawn " + str(amount) + "$ from " + account_number)
 
 	def start(self):
 		self.active = True

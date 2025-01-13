@@ -103,6 +103,14 @@ class AccountDAO:
 		result = cursor.fetchone()
 		return cls(result[0], result[1], result[2], result[3], result[4], bool(result[5]), result[6], result[7])
 	@classmethod
+	def readByAccountNumber(cls, account_number):
+		sql = "select id, Client_id, Bank_id, account_type, account_number, is_frozen, created_on, balance from Account where account_number=%s"
+		values = (account_number,)
+		cursor = dbsingleton.DBSingleton().cursor()
+		cursor.execute(sql, values)
+		result = cursor.fetchone()
+		return cls(result[0], result[1], result[2], result[3], result[4], bool(result[5]), result[6], result[7])
+	@classmethod
 	def readAll(cls):
 		sql = "select id, Client_id, Bank_id, account_type, account_number, is_frozen, created_on, balance from Account"
 		cursor = dbsingleton.DBSingleton().cursor()

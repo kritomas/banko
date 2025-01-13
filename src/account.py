@@ -28,3 +28,21 @@ class Account:
 		for a in accounts:
 			res.append(cls(a, clientdao.ClientDAO.read(a.client_id), bankdao.BankDAO.read(a.bank_id)))
 		return res
+	@classmethod
+	def deposit(cls, account_number, amount):
+		if not isinstance(amount, decimal.Decimal):
+			raise TypeError()
+		if amount <= 0:
+			raise ValueError()
+		account = accountdao.AccountDAO.readByAccountNumber(account_number)
+		account.balance += amount
+		accountdao.AccountDAO.update(account)
+	@classmethod
+	def withdraw(cls, account_number, amount):
+		if not isinstance(amount, decimal.Decimal):
+			raise TypeError()
+		if amount <= 0:
+			raise ValueError()
+		account = accountdao.AccountDAO.readByAccountNumber(account_number)
+		account.balance -= amount
+		accountdao.AccountDAO.update(account)
