@@ -12,10 +12,10 @@ class DBSingleton:
 	@classmethod
 	def _connect(cls):
 		cls.connection = mysql.connector.connect(
-			host="127.0.0.1",
-			user="banko",
-			password="banko",
-			database="banko",
+			host=config.conf["db"]["host"],
+			user=config.conf["db"]["user"],
+			password=config.conf["db"]["password"],
+			database=config.conf["db"]["database"],
 			charset="utf8mb4", # Workaround for MariaDB
 			collation="utf8mb4_bin" # Workaround for MariaDB
 		) # TODO: Load from config
