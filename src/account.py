@@ -22,6 +22,11 @@ class Account:
 		account = accountdao.AccountDAO.create(account)
 		return cls(account, client, bank)
 	@classmethod
+	def close(cls, account_number):
+		account = accountdao.AccountDAO.readByAccountNumber(account_number)
+		accountdao.AccountDAO.delete(account)
+		return account
+	@classmethod
 	def list(cls):
 		accounts = accountdao.AccountDAO.readAll()
 		res = []

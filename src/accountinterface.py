@@ -9,6 +9,7 @@ class AccountInterface:
 		self.commands["help"] = self.help
 		self.commands["exit"] = self.exit
 		self.commands["open"] = self.open
+		self.commands["close"] = self.close
 		self.commands["list"] = self.list
 		self.commands["deposit"] = self.deposit
 		self.commands["withdraw"] = self.withdraw
@@ -19,6 +20,7 @@ class AccountInterface:
 		print("help: Display this")
 		print("exit: Exit")
 		print("open: Open new account")
+		print("close: Close account")
 		print("list: List all accounts")
 		print("deposit: Deposit into account")
 		print("withdraw: Withdraw from account")
@@ -29,6 +31,15 @@ class AccountInterface:
 		account_type = input("Type of account (\"basic\"/\"savings\"): ")
 		a = account.Account.open(client_number, bank_number, account_type)
 		print("Opened new account with number", a.account_number)
+	def close(self):
+		print("Closing account...")
+		account_number = input("Number of account: ")
+		confirmation = input("Really close? (y/N): ")
+		if (confirmation == "y" or confirmation == "Y"):
+			a = account.Account.close(account_number)
+			print("Closed account with number", a.account_number)
+		else:
+			print("Aborting.")
 	def list(self):
 		accounts = account.Account.list()
 		for a in accounts:
