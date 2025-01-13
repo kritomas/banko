@@ -24,6 +24,7 @@ create table Bank
 (
 	id int primary key auto_increment,
 	Address_id int not null,
+	name varchar(64) unique not null,
 
 	foreign key (Address_id) references Address(id)
 );
@@ -40,17 +41,6 @@ create table Account
 
 	foreign key (Client_id) references Client(id),
 	foreign key (Bank_id) references Bank(id)
-);
-create table Card
-(
-	id int primary key auto_increment,
-	Account_id int not null,
-	card_number varchar(32) unique not null,
-	created_on datetime default current_timestamp,
-	expires_on datetime,
-
-	foreign key (Account_id) references Account(id) on delete cascade,
-	check (expires_on > created_on)
 );
 create table Transaction
 (

@@ -55,7 +55,7 @@ class AddressDAO:
 
 	@classmethod
 	def create(cls, obj):
-		if not isinstance(obj, AddressDAO):
+		if not isinstance(obj, cls):
 			raise TypeError()
 		sql = "insert into Address (city, street, house_number, additional) values (%s, %s, %s, %s)"
 		values = (obj.city, obj.street, obj.house_number, obj.additional)
@@ -70,7 +70,7 @@ class AddressDAO:
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		result = cursor.fetchone()
-		return AddressDAO(result[0], result[1], result[2], result[3], result[4])
+		return cls(result[0], result[1], result[2], result[3], result[4])
 	@classmethod
 	def readAll(cls):
 		sql = "select id, city, street, house_number, additional from Address"
@@ -80,11 +80,11 @@ class AddressDAO:
 		bulk = cursor.fetchall()
 		result = []
 		for b in bulk:
-			result.append(AddressDAO(b[0], b[1], b[2], b[3], b[4]))
+			result.append(cls(b[0], b[1], b[2], b[3], b[4]))
 		return result
 	@classmethod
 	def update(cls, obj):
-		if not isinstance(obj, AddressDAO):
+		if not isinstance(obj, cls):
 			raise TypeError()
 		sql = "update Address set city=%s, street=%s, house_number=%s, additional=%s where id=%s"
 		values = (obj.city, obj.street, obj.house_number, obj.additional, obj.id)
@@ -93,7 +93,7 @@ class AddressDAO:
 		dbsingleton.DBSingleton().commit()
 	@classmethod
 	def delete(cls, obj):
-		if not isinstance(obj, AddressDAO):
+		if not isinstance(obj, cls):
 			raise TypeError()
 		sql = "delete from Address where id=%s"
 		values = (obj.id, )

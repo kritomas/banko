@@ -65,7 +65,7 @@ class ClientDAO:
 
 	@classmethod
 	def create(cls, obj):
-		if not isinstance(obj, ClientDAO):
+		if not isinstance(obj, cls):
 			raise TypeError()
 		sql = "insert into Client (Address_id, first_name, last_name, email, client_number) values (%s, %s, %s, %s, %s)"
 		values = (obj.address_id, obj.first_name, obj.last_name, obj.email, obj.client_number)
@@ -80,7 +80,7 @@ class ClientDAO:
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		result = cursor.fetchone()
-		return ClientDAO(result[0], result[1], result[2], result[3], result[4], result[5])
+		return cls(result[0], result[1], result[2], result[3], result[4], result[5])
 	@classmethod
 	def readAll(cls):
 		sql = "select id, Address_id, first_name, last_name, email, client_number from Client"
@@ -90,11 +90,11 @@ class ClientDAO:
 		bulk = cursor.fetchall()
 		result = []
 		for b in bulk:
-			result.append(ClientDAO(b[0], b[1], b[2], b[3], b[4], b[5]))
+			result.append(cls(b[0], b[1], b[2], b[3], b[4], b[5]))
 		return result
 	@classmethod
 	def update(cls, obj):
-		if not isinstance(obj, ClientDAO):
+		if not isinstance(obj, cls):
 			raise TypeError()
 		sql = "update Client set Address_id=%s, first_name=%s, last_name=%s, email=%s, client_number=%s where id=%s"
 		values = (obj.address_id, obj.first_name, obj.last_name, obj.email, obj.client_number, obj.id)
@@ -103,7 +103,7 @@ class ClientDAO:
 		dbsingleton.DBSingleton().commit()
 	@classmethod
 	def delete(cls, obj):
-		if not isinstance(obj, ClientDAO):
+		if not isinstance(obj, cls):
 			raise TypeError()
 		sql = "delete from Client where id=%s"
 		values = (obj.id, )
