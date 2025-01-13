@@ -24,7 +24,7 @@ create table Bank
 (
 	id int primary key auto_increment,
 	Address_id int not null,
-	name varchar(64) unique not null,
+	bank_number varchar(32) unique not null,
 
 	foreign key (Address_id) references Address(id)
 );

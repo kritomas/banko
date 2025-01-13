@@ -1,10 +1,10 @@
 from src import dbsingleton
 
 class BankDAO:
-	def __init__(self, id, address_id, name):
+	def __init__(self, id, address_id, bank_number):
 		self.id = id
 		self.address_id = address_id
-		self.name = name
+		self.bank_number = bank_number
 
 	@property
 	def id(self):
@@ -25,27 +25,27 @@ class BankDAO:
 		self._address_id = val
 
 	@property
-	def name(self):
-		return self._name
-	@name.setter
-	def name(self, val):
+	def bank_number(self):
+		return self._bank_number
+	@bank_number.setter
+	def bank_number(self, val):
 		if not isinstance(val, str):
 			raise TypeError()
-		self._name = val
+		self._bank_number = val
 
 	@classmethod
 	def create(cls, obj):
 		if not isinstance(obj, cls):
 			raise TypeError()
-		sql = "insert into Bank (Address_id, name) values (%s, %s)"
-		values = (obj.address_id, obj.name)
+		sql = "insert into Bank (Address_id, bank_number) values (%s, %s)"
+		values = (obj.address_id, obj.bank_number)
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		dbsingleton.DBSingleton().commit()
 		return cls.read(cursor.lastrowid)
 	@classmethod
 	def read(cls, id):
-		sql = "select id, Address_id, name from Bank where id=%s"
+		sql = "select id, Address_id, bank_number from Bank where id=%s"
 		values = (id,)
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
@@ -53,7 +53,7 @@ class BankDAO:
 		return cls(result[0], result[1], result[2])
 	@classmethod
 	def readAll(cls):
-		sql = "select id, Address_id, name from Bank"
+		sql = "select id, Address_id, bank_number from Bank"
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql)
 		bulk = cursor.fetchall()
@@ -65,8 +65,8 @@ class BankDAO:
 	def update(cls, obj):
 		if not isinstance(obj, cls):
 			raise TypeError()
-		sql = "update Bank set Address_id=%s, name=%s where id=%s"
-		values = (obj.address_id, obj.name, obj.id)
+		sql = "update Bank set Address_id=%s, bank_number=%s where id=%s"
+		values = (obj.address_id, obj.bank_number, obj.id)
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		dbsingleton.DBSingleton().commit()
