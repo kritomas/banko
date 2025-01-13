@@ -89,7 +89,7 @@ class AccountDAO:
 		if not isinstance(obj, cls):
 			raise TypeError()
 		sql = "insert into Account (Client_id, Bank_id, account_type, account_number, is_frozen, created_on, balance) values (%s, %s, %s, %s, %s, %s, %s)"
-		values = (obj.client_id, obj.bank_id, obj.account_type, obj.account_number, obj.is_frozen, created_on, balance)
+		values = (obj.client_id, obj.bank_id, obj.account_type, obj.account_number, obj.is_frozen, obj.created_on, obj.balance)
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		dbsingleton.DBSingleton().commit()
@@ -101,7 +101,7 @@ class AccountDAO:
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		result = cursor.fetchone()
-		return cls(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7])
+		return cls(result[0], result[1], result[2], result[3], result[4], bool(result[5]), result[6], result[7])
 	@classmethod
 	def readAll(cls):
 		sql = "select id, Client_id, Bank_id, account_type, account_number, is_frozen, created_on, balance from Account"
@@ -110,7 +110,7 @@ class AccountDAO:
 		bulk = cursor.fetchall()
 		result = []
 		for b in bulk:
-			result.append(cls(b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]))
+			result.append(cls(b[0], b[1], b[2], b[3], b[4], bool(b[5]), b[6], b[7]))
 		return result
 	@classmethod
 	def update(cls, obj):

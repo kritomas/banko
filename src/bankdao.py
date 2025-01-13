@@ -52,6 +52,14 @@ class BankDAO:
 		result = cursor.fetchone()
 		return cls(result[0], result[1], result[2])
 	@classmethod
+	def readByBankNumber(cls, bank_number):
+		sql = "select id, Address_id, bank_number from Bank where bank_number=%s"
+		values = (bank_number,)
+		cursor = dbsingleton.DBSingleton().cursor()
+		cursor.execute(sql, values)
+		result = cursor.fetchone()
+		return cls(result[0], result[1], result[2])
+	@classmethod
 	def readAll(cls):
 		sql = "select id, Address_id, bank_number from Bank"
 		cursor = dbsingleton.DBSingleton().cursor()

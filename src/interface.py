@@ -1,4 +1,4 @@
-from src import clientinterface, bankinterface
+from src import clientinterface, bankinterface, accountinterface
 
 class Interface:
 	def __init__(self):
@@ -9,6 +9,7 @@ class Interface:
 		self.commands["exit"] = self.exit
 		self.commands["client"] = clientinterface.ClientInterface().start
 		self.commands["bank"] = bankinterface.BankInterface().start
+		self.commands["account"] = accountinterface.AccountInterface().start
 
 	def exit(self):
 		self.active = False
@@ -17,6 +18,7 @@ class Interface:
 		print("exit: Exit")
 		print("client: Manage clients")
 		print("bank: Manage banks")
+		print("account: Manage accounts")
 
 	def start(self):
 		self.active = True
@@ -29,8 +31,6 @@ class Interface:
 					self.commands[cmd]()
 				else:
 					print("Unknown command")
-			except KeyboardInterrupt:
-				print("Type \"exit\" to exit")
 			except EOFError:
 				self.active = False
 			except Exception as error:
