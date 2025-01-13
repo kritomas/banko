@@ -83,3 +83,5 @@ begin
 	call Bank_Transfer(from_account_number, to_account_number, amount, null);
 end //
 delimiter ;
+
+-- Required grants: SELECT,INSERT,UPDATE,DELETE,EXECUTE

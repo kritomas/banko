@@ -1,4 +1,4 @@
-from src import clientinterface, bankinterface, accountinterface
+from src import clientinterface, bankinterface, accountinterface, transactioninterface
 
 class Interface:
 	def __init__(self):
@@ -10,6 +10,7 @@ class Interface:
 		self.commands["client"] = clientinterface.ClientInterface().start
 		self.commands["bank"] = bankinterface.BankInterface().start
 		self.commands["account"] = accountinterface.AccountInterface().start
+		self.commands["transaction"] = transactioninterface.TransactionInterface().start
 
 	def exit(self):
 		self.active = False
@@ -19,6 +20,7 @@ class Interface:
 		print("client: Manage clients")
 		print("bank: Manage banks")
 		print("account: Manage accounts")
+		print("transaction: Manage transactions")
 
 	def start(self):
 		self.active = True

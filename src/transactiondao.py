@@ -110,3 +110,10 @@ class TransactionDAO:
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		dbsingleton.DBSingleton().commit()
+	@classmethod
+	def transfer(cls, from_number, to_number, amount, notes=None):
+		sql = "call Bank_Transfer(%s, %s, %s, %s)"
+		values = (from_number, to_number, amount, notes)
+		cursor = dbsingleton.DBSingleton().cursor()
+		cursor.execute(sql, values)
+		dbsingleton.DBSingleton().commit()

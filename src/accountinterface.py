@@ -28,7 +28,7 @@ class AccountInterface:
 		bank_number = input("Number of bank: ")
 		account_type = input("Type of account (\"basic\"/\"savings\"): ")
 		a = account.Account.open(client_number, bank_number, account_type)
-		print("Registered new account with number", a.account_number)
+		print("Opened new account with number", a.account_number)
 	def list(self):
 		accounts = account.Account.list()
 		for a in accounts:
