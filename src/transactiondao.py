@@ -60,7 +60,7 @@ class TransactionDAO:
 		return self._notes
 	@notes.setter
 	def notes(self, val):
-		if not isinstance(val, str):
+		if not isinstance(val, str) and val != None:
 			raise TypeError()
 		self._notes = val
 

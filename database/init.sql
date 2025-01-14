@@ -36,7 +36,7 @@ create table Account
 	account_type enum('basic', 'savings') not null,
 	account_number varchar(32) unique not null,
 	is_frozen bit not null default 0,
-	created_on datetime default current_timestamp,
+	created_on datetime not null default current_timestamp,
 	balance decimal(16, 2) not null default 0 check(balance >= 0),
 
 	foreign key (Client_id) references Client(id),
@@ -47,7 +47,7 @@ create table Transaction
 	id int primary key auto_increment,
 	from_id int not null,
 	to_id int not null,
-	created_on datetime default current_timestamp,
+	created_on datetime not null default current_timestamp,
 	amount decimal(16, 2) not null default 0 check(amount >= 0),
 	notes varchar(512),
 
@@ -77,7 +77,6 @@ begin
 	insert into Transaction (from_id, to_id, amount, notes) values (from_id, to_id, amount, notes);
 	commit;
 end //
-
 create procedure Bank_Transfer_Without_Notes(in from_account_number varchar(32), in to_account_number varchar(32), in amount decimal(16, 2))
 begin
 	call Bank_Transfer(from_account_number, to_account_number, amount, null);
