@@ -13,6 +13,16 @@ class Transaction:
 
 	@classmethod
 	def transfer(cls, from_number, to_number, amount, notes=None):
+		account = accountdao.AccountDAO.readByAccountNumber(from_number)
+		if account == None:
+			raise ValueError("Sender account doesn't exist")
+		account = accountdao.AccountDAO.readByAccountNumber(to_number)
+		if account == None:
+			raise ValueError("Recipient account doesn't exist")
+		if not isinstance(amount, decimal.Decimal):
+			raise TypeError("Amount must be a decimal")
+		if amount <= 0:
+			raise ValueError("Amount must be positive")
 		transactiondao.TransactionDAO.transfer(from_number, to_number, amount, notes)
 		#fromacc = accountdao.AccountDAO.readByAccountNumber(from_number)
 		#toacc = accountdao.AccountDAO.readByAccountNumber(to_number)

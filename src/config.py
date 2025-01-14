@@ -13,6 +13,7 @@ if not "password" in conf["db"]:
 	raise ValueError("Config entry db.password not found")
 if not "database" in conf["db"]:
 	raise ValueError("Config entry db.database not found")
+
 if not isinstance(conf["db"]["host"], str):
 	raise ValueError("sum: Config entry db.host must be a string")
 if not isinstance(conf["db"]["user"], str):

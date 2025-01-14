@@ -47,13 +47,21 @@ class AccountInterface:
 	def deposit(self):
 		print("Depositing $$$ into account...")
 		account_number = input("Number of account: ")
-		amount = decimal.Decimal(input("Amount to deposit: "))
+		amount = input("Amount to deposit: ")
+		try:
+			amount = decimal.Decimal(amount)
+		except:
+			raise ValueError("Couldn't parse amount as a decimal")
 		account.Account.deposit(account_number, amount)
 		print("Deposited " + str(amount) + "$ into " + account_number)
 	def withdraw(self):
 		print("Withdrawing $$$ from account...")
 		account_number = input("Number of account: ")
-		amount = decimal.Decimal(input("Amount to withdraw: "))
+		amount = input("Amount to withdraw: ")
+		try:
+			amount = decimal.Decimal(amount)
+		except:
+			raise ValueError("Couldn't parse amount as a decimal")
 		account.Account.withdraw(account_number, amount)
 		print("Withdrawn " + str(amount) + "$ from " + account_number)
 

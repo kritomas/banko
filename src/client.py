@@ -35,6 +35,8 @@ class Client:
 		with open(filepath, newline="") as file:
 			reader = csv.reader(file, delimiter=",", quotechar="\"")
 			for row in reader:
+				if len(row) != 7:
+					raise ValueError("Malformed CSV; must be like first_name,last_name,email,city,street,house_number,additional")
 				if row[6] == "":
 					row[6] = None
 				cls.register(row[0], row[1], row[2], row[3], row[4], row[5], row[6])

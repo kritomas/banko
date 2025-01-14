@@ -26,7 +26,11 @@ class TransactionInterface:
 		print("Transfer $$$ between accounts...")
 		from_number = input("Number of account to transfer from: ")
 		to_number = input("Number of account to transfer to: ")
-		amount = decimal.Decimal(input("Amount to transfer: "))
+		amount = input("Amount to transfer: ")
+		try:
+			amount = decimal.Decimal(amount)
+		except:
+			raise ValueError("Couldn't parse amount as a decimal")
 		notes = input("Additional notes (can be blank): ")
 		if notes == "":
 			notes = None

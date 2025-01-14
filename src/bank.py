@@ -32,6 +32,8 @@ class Bank:
 		with open(filepath, newline="") as file:
 			reader = csv.reader(file, delimiter=",", quotechar="\"")
 			for row in reader:
+				if len(row) != 4:
+					raise ValueError("Malformed CSV; must be like city,street,house_number,additional")
 				if row[3] == "":
 					row[3] = None
 				cls.register(row[0], row[1], row[2], row[3])
