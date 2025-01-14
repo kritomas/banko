@@ -1,6 +1,17 @@
-#from src import dbsingleton, config, addressdao, clientdao
-#dao = addressdao.AddressDAO(0, "Ankh-Morkpork", "Palacum", "1", None)
-#clientdao.ClientDAO.readByClientNumber("123456")
+import sys
+
+try:
+	from src import config
+except Exception as error:
+	print("Config loading failed:", error)
+	sys.exit(-1)
+
+try:
+	from src import dbsingleton
+	dbsingleton.DBSingleton()
+except Exception as error:
+	print("Connection to DB failed:", error)
+	sys.exit(-1)
 
 from src import interface
 i = interface.Interface()

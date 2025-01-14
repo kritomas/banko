@@ -16,7 +16,7 @@ class TransactionDAO:
 	@id.setter
 	def id(self, val):
 		if not isinstance(val, int):
-			raise TypeError()
+			raise TypeError("id must be an integer")
 		self._id = val
 
 	@property
@@ -25,7 +25,7 @@ class TransactionDAO:
 	@from_id.setter
 	def from_id(self, val):
 		if not isinstance(val, int):
-			raise TypeError()
+			raise TypeError("from_id must be an integer")
 		self._from_id = val
 
 	@property
@@ -34,7 +34,7 @@ class TransactionDAO:
 	@to_id.setter
 	def to_id(self, val):
 		if not isinstance(val, int):
-			raise TypeError()
+			raise TypeError("to_id must be an integer")
 		self._to_id = val
 
 	@property
@@ -43,7 +43,7 @@ class TransactionDAO:
 	@created_on.setter
 	def created_on(self, val):
 		if not isinstance(val, datetime.datetime):
-			raise TypeError()
+			raise TypeError("created_on must be a datetime")
 		self._created_on = val
 
 	@property
@@ -52,7 +52,7 @@ class TransactionDAO:
 	@amount.setter
 	def amount(self, val):
 		if not isinstance(val, decimal.Decimal):
-			raise TypeError()
+			raise TypeError("amount must be a decimal")
 		self._amount = val
 
 	@property
@@ -61,13 +61,13 @@ class TransactionDAO:
 	@notes.setter
 	def notes(self, val):
 		if not isinstance(val, str) and val != None:
-			raise TypeError()
+			raise TypeError("notes must be a string or None")
 		self._notes = val
 
 	@classmethod
 	def create(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "insert into Transaction (from_id, to_id, created_on, amount, notes) values (%s, %s, %s, %s, %s)"
 		values = (obj.from_id, obj.to_id, obj.created_on, obj.amount, obj.notes)
 		cursor = dbsingleton.DBSingleton().cursor()
@@ -97,7 +97,7 @@ class TransactionDAO:
 	@classmethod
 	def update(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "update Transaction set from_id=%s, to_id=%s, created_on=%s, amount=%s, notes=%s where id=%s"
 		values = (obj.from_id, obj.to_id, obj.created_on, obj.amount, obj.notes, obj.id)
 		cursor = dbsingleton.DBSingleton().cursor()
@@ -106,7 +106,7 @@ class TransactionDAO:
 	@classmethod
 	def delete(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "delete from Transaction where id=%s"
 		values = (obj.id, )
 		cursor = dbsingleton.DBSingleton().cursor()

@@ -15,7 +15,7 @@ class ClientDAO:
 	@id.setter
 	def id(self, val):
 		if not isinstance(val, int):
-			raise TypeError()
+			raise TypeError("id must be an integer")
 		self._id = val
 
 	@property
@@ -24,7 +24,7 @@ class ClientDAO:
 	@address_id.setter
 	def address_id(self, val):
 		if not isinstance(val, int):
-			raise TypeError()
+			raise TypeError("address_id must be an integer")
 		self._address_id = val
 
 	@property
@@ -33,7 +33,7 @@ class ClientDAO:
 	@first_name.setter
 	def first_name(self, val):
 		if not isinstance(val, str):
-			raise TypeError()
+			raise TypeError("first_name must be a string")
 		self._first_name = val
 
 	@property
@@ -42,7 +42,7 @@ class ClientDAO:
 	@last_name.setter
 	def last_name(self, val):
 		if not isinstance(val, str):
-			raise TypeError()
+			raise TypeError("last_name must be a string")
 		self._last_name = val
 
 	@property
@@ -51,7 +51,7 @@ class ClientDAO:
 	@email.setter
 	def email(self, val):
 		if not isinstance(val, str):
-			raise TypeError()
+			raise TypeError("email must be a string")
 		self._email = val
 
 	@property
@@ -60,13 +60,13 @@ class ClientDAO:
 	@client_number.setter
 	def client_number(self, val):
 		if not isinstance(val, str):
-			raise TypeError()
+			raise TypeError("client_number must be a string")
 		self._client_number = val
 
 	@classmethod
 	def create(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "insert into Client (Address_id, first_name, last_name, email, client_number) values (%s, %s, %s, %s, %s)"
 		values = (obj.address_id, obj.first_name, obj.last_name, obj.email, obj.client_number)
 		cursor = dbsingleton.DBSingleton().cursor()
@@ -106,7 +106,7 @@ class ClientDAO:
 	@classmethod
 	def update(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "update Client set Address_id=%s, first_name=%s, last_name=%s, email=%s, client_number=%s where id=%s"
 		values = (obj.address_id, obj.first_name, obj.last_name, obj.email, obj.client_number, obj.id)
 		cursor = dbsingleton.DBSingleton().cursor()
@@ -115,7 +115,7 @@ class ClientDAO:
 	@classmethod
 	def delete(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "delete from Client where id=%s"
 		values = (obj.id, )
 		cursor = dbsingleton.DBSingleton().cursor()

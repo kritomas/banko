@@ -12,7 +12,7 @@ class BankDAO:
 	@id.setter
 	def id(self, val):
 		if not isinstance(val, int):
-			raise TypeError()
+			raise TypeError("id must be an integer")
 		self._id = val
 
 	@property
@@ -21,7 +21,7 @@ class BankDAO:
 	@address_id.setter
 	def address_id(self, val):
 		if not isinstance(val, int):
-			raise TypeError()
+			raise TypeError("address_id must be an integer")
 		self._address_id = val
 
 	@property
@@ -30,13 +30,13 @@ class BankDAO:
 	@bank_number.setter
 	def bank_number(self, val):
 		if not isinstance(val, str):
-			raise TypeError()
+			raise TypeError("bank_number must be a string")
 		self._bank_number = val
 
 	@classmethod
 	def create(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "insert into Bank (Address_id, bank_number) values (%s, %s)"
 		values = (obj.address_id, obj.bank_number)
 		cursor = dbsingleton.DBSingleton().cursor()
@@ -76,7 +76,7 @@ class BankDAO:
 	@classmethod
 	def update(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "update Bank set Address_id=%s, bank_number=%s where id=%s"
 		values = (obj.address_id, obj.bank_number, obj.id)
 		cursor = dbsingleton.DBSingleton().cursor()
@@ -85,7 +85,7 @@ class BankDAO:
 	@classmethod
 	def delete(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "delete from Bank where id=%s"
 		values = (obj.id, )
 		cursor = dbsingleton.DBSingleton().cursor()

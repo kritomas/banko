@@ -14,7 +14,7 @@ class AddressDAO:
 	@id.setter
 	def id(self, val):
 		if not isinstance(val, int):
-			raise TypeError()
+			raise TypeError("id must be an integer")
 		self._id = val
 
 	@property
@@ -23,7 +23,7 @@ class AddressDAO:
 	@city.setter
 	def city(self, val):
 		if not isinstance(val, str):
-			raise TypeError()
+			raise TypeError("city must be a string")
 		self._city = val
 
 	@property
@@ -32,7 +32,7 @@ class AddressDAO:
 	@street.setter
 	def street(self, val):
 		if not isinstance(val, str):
-			raise TypeError()
+			raise TypeError("street must be a string")
 		self._street = val
 
 	@property
@@ -41,7 +41,7 @@ class AddressDAO:
 	@house_number.setter
 	def house_number(self, val):
 		if not isinstance(val, str):
-			raise TypeError()
+			raise TypeError("house_number must be a string")
 		self._house_number = val
 
 	@property
@@ -50,13 +50,13 @@ class AddressDAO:
 	@additional.setter
 	def additional(self, val):
 		if not isinstance(val, str) and val != None:
-			raise TypeError()
+			raise TypeError("additional must be a string or None")
 		self._additional = val
 
 	@classmethod
 	def create(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "insert into Address (city, street, house_number, additional) values (%s, %s, %s, %s)"
 		values = (obj.city, obj.street, obj.house_number, obj.additional)
 		cursor = dbsingleton.DBSingleton().cursor()
@@ -86,7 +86,7 @@ class AddressDAO:
 	@classmethod
 	def update(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "update Address set city=%s, street=%s, house_number=%s, additional=%s where id=%s"
 		values = (obj.city, obj.street, obj.house_number, obj.additional, obj.id)
 		cursor = dbsingleton.DBSingleton().cursor()
@@ -95,7 +95,7 @@ class AddressDAO:
 	@classmethod
 	def delete(cls, obj):
 		if not isinstance(obj, cls):
-			raise TypeError()
+			raise TypeError("obj must be an instance of this class")
 		sql = "delete from Address where id=%s"
 		values = (obj.id, )
 		cursor = dbsingleton.DBSingleton().cursor()
