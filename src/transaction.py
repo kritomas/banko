@@ -1,4 +1,4 @@
-import random, datetime, decimal
+import random, datetime, decimal, threading
 from src import transactiondao, accountdao, dbsingleton
 class Transaction:
 	def __init__(self, transactiondao, fromdao, todao):
@@ -23,19 +23,16 @@ class Transaction:
 			raise TypeError("Amount must be a decimal")
 		if amount <= 0:
 			raise ValueError("Amount must be positive")
-		cursor = dbsingleton.DBSingleton().cursor()
+		cursor = dbsingleton.DBSingletonAlternative().cursor()
 		cursor.execute("start transaction")
+		t = threading.Thread(target=transactiondao.TransactionDAO.transfer, args=(from_number, to_number, amount, notes)) # A separate thread is required for non-repeatable reads, a deadlock occurs otherwise.
+		t.start()
 		account = accountdao.AccountDAO.readByAccountNumber(from_number, cursor)
 		print("Account balance before:", account.balance)
-		transactiondao.TransactionDAO.transfer(from_number, to_number, amount, notes)
 		account = accountdao.AccountDAO.readByAccountNumber(from_number, cursor)
 		print("Account balance after:", account.balance)
 		cursor.execute("commit")
-		#fromacc = accountdao.AccountDAO.readByAccountNumber(from_number)
-		#toacc = accountdao.AccountDAO.readByAccountNumber(to_number)
-		#transaction = transactiondao.TransactionDAO(0, fromacc.id, toacc.id, d#atetime.datetime.now(), amount, toacc)
-		#transaction = transactiondao.TransactionDAO.create(account)
-		#return cls(transaction, fromacc, bank)
+		t.join()
 	@classmethod
 	def list(cls):
 		transactions = transactiondao.TransactionDAO.readAll()
