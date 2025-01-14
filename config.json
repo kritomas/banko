@@ -5,5 +5,9 @@
 		"user": "banko",
 		"password": "banko",
 		"database": "banko"
+	},
+	"fun":
+	{
+		"isolation_level": "READ UNCOMMITTED"
 	}
 }

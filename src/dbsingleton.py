@@ -18,7 +18,10 @@ class DBSingleton:
 			database=config.conf["db"]["database"],
 			charset="utf8mb4", # Workaround for MariaDB
 			collation="utf8mb4_bin" # Workaround for MariaDB
-		) # TODO: Load from config
+		)
+		cursor = cls.connection.cursor()
+		cursor.execute("set session transaction isolation level " + config.conf["fun"]["isolation_level"])
+		cls.connection.commit()
 	@classmethod
 	def close(cls):
 		cls.connection.close()
