@@ -50,6 +50,8 @@ class BankDAO:
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		result = cursor.fetchone()
+		if result == None:
+			return None
 		return cls(result[0], result[1], result[2])
 	@classmethod
 	def readByBankNumber(cls, bank_number):
@@ -58,6 +60,8 @@ class BankDAO:
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		result = cursor.fetchone()
+		if result == None:
+			return None
 		return cls(result[0], result[1], result[2])
 	@classmethod
 	def readAll(cls):

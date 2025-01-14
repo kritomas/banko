@@ -101,6 +101,8 @@ class AccountDAO:
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		result = cursor.fetchone()
+		if result == None:
+			return None
 		return cls(result[0], result[1], result[2], result[3], result[4], bool(result[5]), result[6], result[7])
 	@classmethod
 	def readByAccountNumber(cls, account_number):
@@ -109,6 +111,8 @@ class AccountDAO:
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		result = cursor.fetchone()
+		if result == None:
+			return None
 		return cls(result[0], result[1], result[2], result[3], result[4], bool(result[5]), result[6], result[7])
 	@classmethod
 	def readAll(cls):

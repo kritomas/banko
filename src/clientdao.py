@@ -80,6 +80,8 @@ class ClientDAO:
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		result = cursor.fetchone()
+		if result == None:
+			return None
 		return cls(result[0], result[1], result[2], result[3], result[4], result[5])
 	@classmethod
 	def readByClientNumber(cls, client_number):
@@ -88,6 +90,8 @@ class ClientDAO:
 		cursor = dbsingleton.DBSingleton().cursor()
 		cursor.execute(sql, values)
 		result = cursor.fetchone()
+		if result == None:
+			return None
 		return cls(result[0], result[1], result[2], result[3], result[4], result[5])
 	@classmethod
 	def readAll(cls):
