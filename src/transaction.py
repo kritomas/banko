@@ -1,5 +1,5 @@
 import random, datetime, decimal
-from src import transactiondao, accountdao
+from src import transactiondao, accountdao, dbsingleton
 class Transaction:
 	def __init__(self, transactiondao, fromdao, todao):
 		self.from_number = fromdao.account_number
@@ -23,7 +23,14 @@ class Transaction:
 			raise TypeError("Amount must be a decimal")
 		if amount <= 0:
 			raise ValueError("Amount must be positive")
+		cursor = dbsingleton.DBSingleton().cursor()
+		cursor.execute("start transaction")
+		account = accountdao.AccountDAO.readByAccountNumber(from_number, cursor)
+		print("Account balance before:", account.balance)
 		transactiondao.TransactionDAO.transfer(from_number, to_number, amount, notes)
+		account = accountdao.AccountDAO.readByAccountNumber(from_number, cursor)
+		print("Account balance after:", account.balance)
+		cursor.execute("commit")
 		#fromacc = accountdao.AccountDAO.readByAccountNumber(from_number)
 		#toacc = accountdao.AccountDAO.readByAccountNumber(to_number)
 		#transaction = transactiondao.TransactionDAO(0, fromacc.id, toacc.id, d#atetime.datetime.now(), amount, toacc)

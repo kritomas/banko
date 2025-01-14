@@ -16,7 +16,7 @@ class TransactionInterface:
 	def help(self):
 		print("help: Display this")
 		print("exit: Exit")
-		print("list: List all accounts")
+		print("list: List all transactions")
 		print("transfer: Transfer $$$ between accounts")
 	def list(self):
 		transactions = transaction.Transaction.list()
