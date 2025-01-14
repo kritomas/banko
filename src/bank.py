@@ -1,4 +1,4 @@
-import random
+import random, csv
 from src import addressdao, bankdao
 
 class Bank:
@@ -26,3 +26,14 @@ class Bank:
 		for b in banks:
 			res.append(cls(b, addressdao.AddressDAO.read(b.address_id)))
 		return res
+	@classmethod
+	def importCSV(cls, filepath):
+		counter = 0
+		with open(filepath, newline="") as file:
+			reader = csv.reader(file, delimiter=",", quotechar="\"")
+			for row in reader:
+				if row[3] == "":
+					row[3] = None
+				cls.register(row[0], row[1], row[2], row[3])
+				counter += 1
+		return counter

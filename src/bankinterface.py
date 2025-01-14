@@ -9,6 +9,7 @@ class BankInterface:
 		self.commands["exit"] = self.exit
 		self.commands["register"] = self.register
 		self.commands["list"] = self.list
+		self.commands["import"] = self.importCSV
 
 	def exit(self):
 		self.active = False
@@ -17,6 +18,7 @@ class BankInterface:
 		print("exit: Exit")
 		print("register: Register new bank")
 		print("list: List all banks")
+		print("import: Import banks from a CSV file")
 	def register(self):
 		print("Registering new bank...")
 		city = input("City: ")
@@ -31,6 +33,11 @@ class BankInterface:
 		banks = bank.Bank.list()
 		for b in banks:
 			print(b)
+	def importCSV(self):
+		print("Importing banks from CSV...")
+		filepath = input("Filepath: ")
+		c = bank.Bank.importCSV(filepath)
+		print("Imported", c, "banks")
 
 	def start(self):
 		self.active = True
