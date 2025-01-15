@@ -17,6 +17,30 @@ class Client:
 
 	@classmethod
 	def register(cls, first_name, last_name, email, city, street, house_number, additional=None):
+		if not isinstance(first_name, str):
+			raise TypeError("First name must be a string")
+		if not isinstance(last_name, str):
+			raise TypeError("Last name must be a string")
+		if not isinstance(email, str):
+			raise TypeError("Email must be a string")
+		if not isinstance(city, str):
+			raise TypeError("City must be a string")
+		if not isinstance(house_number, str):
+			raise TypeError("House number must be a string")
+		if not isinstance(additional, str) and additional != None:
+			raise TypeError("Additional address info must be a string or empty")
+		if len(first_name) <= 0:
+			raise ValueError("First name cannot be empty")
+		if len(last_name) <= 0:
+			raise ValueError("Last name cannot be empty")
+		if len(email) <= 0:
+			raise ValueError("Email cannot be empty")
+		if len(city) <= 0:
+			raise ValueError("City cannot be empty")
+		if len(street) <= 0:
+			raise ValueError("Street cannot be empty")
+		if len(house_number) <= 0:
+			raise ValueError("House number cannot be empty")
 		address = addressdao.AddressDAO(0, city, street, house_number, additional)
 		address = addressdao.AddressDAO.create(address)
 		client = clientdao.ClientDAO(0, address.id, first_name, last_name, email, str(random.randint(100000000000, 999999999999)))

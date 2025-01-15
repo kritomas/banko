@@ -14,6 +14,18 @@ class Bank:
 
 	@classmethod
 	def register(cls, city, street, house_number, additional=None):
+		if not isinstance(city, str):
+			raise TypeError("City must be a string")
+		if not isinstance(house_number, str):
+			raise TypeError("House number must be a string")
+		if not isinstance(additional, str) and additional != None:
+			raise TypeError("Additional address info must be a string or empty")
+		if len(city) <= 0:
+			raise ValueError("City cannot be empty")
+		if len(street) <= 0:
+			raise ValueError("Street cannot be empty")
+		if len(house_number) <= 0:
+			raise ValueError("House number cannot be empty")
 		address = addressdao.AddressDAO(0, city, street, house_number, additional)
 		address = addressdao.AddressDAO.create(address)
 		bank = bankdao.BankDAO(0, address.id, str(random.randint(100000000000, 999999999999)))
