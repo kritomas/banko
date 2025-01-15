@@ -50,7 +50,7 @@ See also: `doc/CONFIG.md`.
 Lastly, do a test run of the appliaction:
 
 ```
-python3 main.py
+python3 banqo.py
 ```
 
 If the application gives a welcome message, everything should be ready for use ;)
