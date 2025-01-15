@@ -1,5 +1,8 @@
--- The database has to be created with the utf8mb4 character set and utf8mb4_bin collation:
--- create database banko character set = 'utf8mb4' collate = 'utf8mb4_bin';
+-- Banqo: Copyright (C) 2025 kritomas, kritomasx@gmail.com
+-- If using MariaDB, he database has to be created with the utf8mb4 character set and utf8mb4_bin collation:
+-- create database banqo character set = 'utf8mb4' collate = 'utf8mb4_bin';
+
+start transaction;
 
 create table Address
 (
@@ -82,5 +85,7 @@ begin
 	call Bank_Transfer(from_account_number, to_account_number, amount, null);
 end //
 delimiter ;
+
+commit;
 
 -- Required grants: SELECT,INSERT,UPDATE,DELETE,EXECUTE

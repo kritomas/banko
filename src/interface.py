@@ -24,7 +24,7 @@ class Interface:
 
 	def start(self):
 		self.active = True
-		print("Welcome to Banko, your no. 1 bank management system!")
+		print("Welcome to Banqo, your no. 1 bank management system!")
 		print("Enter \"help\" to get started ;)")
 		while self.active:
 			try:
