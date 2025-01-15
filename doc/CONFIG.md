@@ -2,7 +2,7 @@
 
 This document goes into deeper detail about the config.
 
-The config file should be created in the project root, and named `config.json`:
+The config file should be created in the project root, and named `config.json`. It should have the following format:
 
 ```
 {

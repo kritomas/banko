@@ -14,7 +14,7 @@ In your favorite MySQL server, create a database and invoke all of `database/ini
 Note: If using MariaDB, the database must use the `utf8mb4` character set and the `utf8mb4_bin` collation (or any other character set and collation present in both MariaDB and mainline MySQL):
 
 ```
-create database banqo character set = 'utf8mb4' collate = 'utf8mb4_bin';`
+create database banqo character set = 'utf8mb4' collate = 'utf8mb4_bin';
 ```
 
 **The appliaction will be unable to connect otherwise.**
