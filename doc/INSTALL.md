@@ -19,7 +19,7 @@ create database banqo character set = 'utf8mb4' collate = 'utf8mb4_bin';
 
 **The appliaction will be unable to connect otherwise.**
 
-Then, create a user for the application to access the database. This user will need the following permissions: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `EXECUTE`
+Then, create a MySQL user for the application to access the database. This user will need the following permissions to the DB: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `EXECUTE`
 
 # Application
 

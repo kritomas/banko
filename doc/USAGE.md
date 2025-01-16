@@ -12,7 +12,7 @@ Prompt:
 : 
 ```
 
-The global mode's serves as a junction to access all the other modes.
+The global mode serves as a junction between all the other modes.
 
 ## Account mode
 
@@ -61,3 +61,5 @@ transaction:
 ```
 
 This mode is for transferring money between accounts.
+
+During a transfer, you the app will print the balance of the sender account before and after the transfer. Depending on your config (`doc/CONFIG.md`), you may get a Non-Repeatable Read (`doc/nrr.md`).

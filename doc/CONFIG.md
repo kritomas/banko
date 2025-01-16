@@ -1,8 +1,8 @@
-# Config
+# Banqo - Config
 
-This document goes into deeper detail about the config.
+This document goes into deeper detail about Banqo's config.
 
-The config file should be created in the project root, and named `config.json`. It should have the following format:
+The config file should be created in the project root, and named `config.json`. It must have the following format:
 
 ```
 {
@@ -21,11 +21,11 @@ The config file should be created in the project root, and named `config.json`. 
 
 ### db.host
 
-The address of the database server.
+The address of the MySQL database server.
 
 ### db.user
 
-The username of the user you created for the application. The application will use this user to manipulate with the database. It must have these permissions: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `EXECUTE`.
+The username of the DB user you created for the application. The application will use it user to manipulate with the database. It must have these permissions: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `EXECUTE`.
 
 ### db.password
 
@@ -33,7 +33,7 @@ The password of the user.
 
 ### db.database
 
-The database you created for the application; the one in which you invoked `database/init.sql`.
+The name of the database you created for the application; the one in which you invoked `database/init.sql`.
 
 
 ### fun.isolation_level
