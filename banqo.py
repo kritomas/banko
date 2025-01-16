@@ -14,5 +14,7 @@ except Exception as error:
 	sys.exit(-1)
 
 from src import interface
-i = interface.Interface()
-i.start()
+
+if __name__ == "__main__":
+	i = interface.Interface()
+	i.start()
