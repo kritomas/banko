@@ -1,5 +1,5 @@
 import random, csv
-from src import addressdao, clientdao
+from src import addressdao, clientdao, reportdao
 
 class Client:
 	def __init__(self, clientdao, addressdao):
@@ -69,6 +69,13 @@ class Client:
 		for c in clients:
 			res.append(cls(c, addressdao.AddressDAO.read(c.address_id)))
 		return res
+	@classmethod
+	def report(cls):
+		"""
+		Lists all clients with total balances accross all accounts.
+		Returns: A list of all clients and their total balances.
+		"""
+		return reportdao.ClientBalanceDAO.readAll()
 	@classmethod
 	def importCSV(cls, filepath):
 		"""

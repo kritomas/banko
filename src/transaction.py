@@ -36,9 +36,9 @@ class Transaction:
 		t = threading.Thread(target=transactiondao.TransactionDAO.transfer, args=(from_number, to_number, amount, notes)) # A separate thread is required for non-repeatable reads, a deadlock occurs otherwise.
 		t.start()
 		account = accountdao.AccountDAO.readByAccountNumber(from_number, cursor)
-		print("Account balance before:", account.balance)
+		print("Account balance before: " + str(account.balance) + "$")
 		account = accountdao.AccountDAO.readByAccountNumber(from_number, cursor)
-		print("Account balance after:", account.balance)
+		print("Account balance after: " + str(account.balance) + "$")
 		cursor.execute("commit")
 		t.join()
 	@classmethod

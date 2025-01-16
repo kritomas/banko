@@ -9,6 +9,7 @@ class ClientInterface:
 		self.commands["exit"] = self.exit
 		self.commands["register"] = self.register
 		self.commands["list"] = self.list
+		self.commands["report"] = self.report
 		self.commands["import"] = self.importCSV
 
 	def exit(self):
@@ -18,6 +19,7 @@ class ClientInterface:
 		print("exit: Exit")
 		print("register: Register new client")
 		print("list: List all clients")
+		print("report: List all clients with their total balances accross all accounts")
 		print("import: Import clients from a CSV file")
 	def register(self):
 		print("Registering new client...")
@@ -36,6 +38,10 @@ class ClientInterface:
 		clients = client.Client.list()
 		for c in clients:
 			print(c)
+	def report(self):
+		report = client.Client.report()
+		for r in report:
+			print(r)
 	def importCSV(self):
 		print("Importing clients from CSV...")
 		filepath = input("Filepath: ")

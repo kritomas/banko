@@ -58,12 +58,13 @@ create table Transaction
 	foreign key (to_id) references Account(id) on delete cascade
 );
 
-create view Client_Accounts as
-select first_name, last_name, email, client_number, account_number, account_type, is_frozen, created_on, balance from Client join Account on Client_id=Client.id;
+create view Client_Balance as
+select first_name, last_name, email, client_number, sum(balance) as total_balance
+from Client join Account on Client_id = Client.id group by client_number;
 
-create view Transactions as
-select from_acc.account_number as from_account, to_acc.account_number as to_account, Transaction.amount, Transaction.created_on as took_place_on, Transaction.notes as notes
-from Transaction join Account from_acc on Transaction.from_id = from_acc.id join Account to_acc on Transaction.to_id = to_acc.id;
+create view Bank_Balance as
+select city, street, house_number, additional, bank_number, sum(balance) as total_balance
+from Bank join Account on Bank_id = Bank.id join Address on Address_id = Address.id group by bank_number;
 
 delimiter //
 create procedure Bank_Transfer(in from_account_number varchar(32), in to_account_number varchar(32), in amount decimal(16, 2), in notes varchar(512))
