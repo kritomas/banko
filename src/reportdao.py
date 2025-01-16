@@ -1,5 +1,5 @@
-from src import dbsingleton
 import decimal
+from src import dbsingleton
 
 class ClientBalanceDAO:
 	def __init__(self, first_name, last_name, email, client_number, total_balance):
