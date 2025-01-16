@@ -16,5 +16,3 @@ except Exception as error:
 from src import interface
 i = interface.Interface()
 i.start()
-
-# mysql-connector-python

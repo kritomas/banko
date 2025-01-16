@@ -13,6 +13,14 @@ class Transaction:
 
 	@classmethod
 	def transfer(cls, from_number, to_number, amount, notes=None):
+		"""
+		Transfers money between accounts. Depending on the config, you may see this function perform a Non-Repeatable Read (see documentation).
+		Parameters:
+		`from_number`: Number of the account to transfer from
+		`to_number`: Number of the account to transfer to
+		`amount`: Amount to transfer, must be a decimal
+		`notes`: Notes accompanying the transfer, e.g. 'allowance', can be None
+		"""
 		account = accountdao.AccountDAO.readByAccountNumber(from_number)
 		if account == None:
 			raise ValueError("Sender account doesn't exist")
@@ -35,6 +43,10 @@ class Transaction:
 		t.join()
 	@classmethod
 	def list(cls):
+		"""
+		Lists all transactions.
+		Returns: A list of transactions as instances of this class.
+		"""
 		transactions = transactiondao.TransactionDAO.readAll()
 		res = []
 		for t in transactions:

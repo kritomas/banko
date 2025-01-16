@@ -18,6 +18,14 @@ class Account:
 
 	@classmethod
 	def open(cls, client_number, bank_number, account_type):
+		"""
+		Opens a new account.
+		Parameters:
+		`client_number`: Number of the owner
+		`bank_number`: Number of the bank to manage the account
+		`account_type`: One of: 'basic', 'savings'
+		Returns: The newly created account as an instance of this class.
+		"""
 		client = clientdao.ClientDAO.readByClientNumber(client_number)
 		if client == None:
 			raise ValueError("That client doesn't exist")
@@ -31,6 +39,12 @@ class Account:
 		return cls(account, client, bank)
 	@classmethod
 	def close(cls, account_number):
+		"""
+		Closes an account.
+		Parameters:
+		`account_number`: Number of the account to close.
+		Returns: The just-closed account as an instance of this class.
+		"""
 		account = accountdao.AccountDAO.readByAccountNumber(account_number)
 		if account == None:
 			raise ValueError("That account doesn't exist")
@@ -38,6 +52,10 @@ class Account:
 		return account
 	@classmethod
 	def list(cls):
+		"""
+		Lists all accounts.
+		Returns: A list of all accounts as instances of this class.
+		"""
 		accounts = accountdao.AccountDAO.readAll()
 		res = []
 		for a in accounts:
@@ -45,6 +63,12 @@ class Account:
 		return res
 	@classmethod
 	def deposit(cls, account_number, amount):
+		"""
+		Deposits money into an account.
+		Parameters:
+		`account_number`: Number of the account to deposit into.
+		`amount`: The amount of deposit. Must be a decimal.
+		"""
 		if not isinstance(amount, decimal.Decimal):
 			raise TypeError("Amount must be a decimal")
 		if amount <= 0:
@@ -56,6 +80,12 @@ class Account:
 		accountdao.AccountDAO.update(account)
 	@classmethod
 	def withdraw(cls, account_number, amount):
+		"""
+		Withdraws money from an account.
+		Parameters:
+		`account_number`: Number of the account to withdraw from.
+		`amount`: The amount of withdraw. Must be a decimal.
+		"""
 		if not isinstance(amount, decimal.Decimal):
 			raise TypeError("Amount must be a decimal")
 		if amount <= 0:

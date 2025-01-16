@@ -17,6 +17,18 @@ class Client:
 
 	@classmethod
 	def register(cls, first_name, last_name, email, city, street, house_number, additional=None):
+		"""
+		Registers a new client.
+		Parameters:
+		`first_name`: First name of the client
+		`last_name`: Last name of the client
+		`email`: Email address of the client
+		`city`: Name of the city the client lives in
+		`street`: Name of the street the client lives on
+		`house_number`: Number of the building the client lives in
+		`additional`: Additional address info, e.g. '3rd floor', can be None
+		Returns: The newly created client as an instance of this class.
+		"""
 		if not isinstance(first_name, str):
 			raise TypeError("First name must be a string")
 		if not isinstance(last_name, str):
@@ -48,6 +60,10 @@ class Client:
 		return cls(client, address)
 	@classmethod
 	def list(cls):
+		"""
+		Lists all clients.
+		Returns: A list of all clients as instances of this class.
+		"""
 		clients = clientdao.ClientDAO.readAll()
 		res = []
 		for c in clients:
@@ -55,6 +71,13 @@ class Client:
 		return res
 	@classmethod
 	def importCSV(cls, filepath):
+		"""
+		Imports clients from a CSV file.
+		The CSV must be in the following format:
+		first_name,last_name,email,city,street,house_number,additional_address_info_(can_be_blank)
+		Parameters:
+		`filepath`: Path to the CSV file to import from.
+		"""
 		counter = 0
 		with open(filepath, newline="") as file:
 			reader = csv.reader(file, delimiter=",", quotechar="\"")

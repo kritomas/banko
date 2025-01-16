@@ -14,6 +14,15 @@ class Bank:
 
 	@classmethod
 	def register(cls, city, street, house_number, additional=None):
+		"""
+		Registers a new bank.
+		Parameters:
+		`city`: Name of the city the bank is in
+		`street`: Name of the street the bank is on
+		`house_number`: Number of the building the bank is in
+		`additional`: Additional address info, e.g. '3rd floor', can be None
+		Returns: The newly created bank as an instance of this class.
+		"""
 		if not isinstance(city, str):
 			raise TypeError("City must be a string")
 		if not isinstance(house_number, str):
@@ -33,6 +42,10 @@ class Bank:
 		return cls(bank, address)
 	@classmethod
 	def list(cls):
+		"""
+		Lists all banks.
+		Returns: A list of all banks as instances of this class.
+		"""
 		banks = bankdao.BankDAO.readAll()
 		res = []
 		for b in banks:
@@ -40,6 +53,13 @@ class Bank:
 		return res
 	@classmethod
 	def importCSV(cls, filepath):
+		"""
+		Imports banks from a CSV file.
+		The CSV must be in the following format:
+		city,street,house_number,additional_address_info_(can_be_blank)
+		Parameters:
+		`filepath`: Path to the CSV file to import from.
+		"""
 		counter = 0
 		with open(filepath, newline="") as file:
 			reader = csv.reader(file, delimiter=",", quotechar="\"")
