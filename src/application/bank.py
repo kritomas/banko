@@ -1,5 +1,5 @@
 import random, csv
-from src import addressdao, bankdao, reportdao
+from src.database import addressdao, bankdao, reportdao
 
 class Bank:
 	def __init__(self, bankdao, addressdao):

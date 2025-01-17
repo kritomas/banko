@@ -1,5 +1,5 @@
 import datetime, decimal, time
-from src import dbsingleton
+from src.database import dbsingleton
 
 class TransactionDAO:
 	def __init__(self, id, from_id, to_id, created_on, amount, notes = None):

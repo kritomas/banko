@@ -1,5 +1,5 @@
 import random, csv
-from src import addressdao, clientdao, reportdao
+from src.database import addressdao, clientdao, reportdao
 
 class Client:
 	def __init__(self, clientdao, addressdao):

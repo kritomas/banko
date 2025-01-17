@@ -1,5 +1,5 @@
 import random, datetime, decimal
-from src import accountdao, clientdao, bankdao
+from src.database import accountdao, clientdao, bankdao
 
 ACCOUNT_TYPES = ("basic", "savings")
 

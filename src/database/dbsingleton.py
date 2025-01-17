@@ -1,5 +1,5 @@
 import mysql.connector
-from src import config
+from src.application import config
 
 class DBSingleton:
 	connection = None

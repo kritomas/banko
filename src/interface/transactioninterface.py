@@ -1,5 +1,5 @@
 import decimal
-from src import transaction
+from src.application import transaction
 
 class TransactionInterface:
 	def __init__(self):

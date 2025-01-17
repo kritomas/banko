@@ -1,5 +1,5 @@
 import datetime, decimal
-from src import dbsingleton
+from src.database import dbsingleton
 
 class AccountDAO:
 	def __init__(self, id, client_id, bank_id, account_type, account_number, is_frozen, created_on, balance):

@@ -1,4 +1,4 @@
-from src import dbsingleton
+from src.database import dbsingleton
 
 class AddressDAO:
 	def __init__(self, id, city, street, house_number, additional=None):

@@ -1,4 +1,4 @@
-from src import dbsingleton
+from src.database import dbsingleton
 
 class BankDAO:
 	def __init__(self, id, address_id, bank_number):

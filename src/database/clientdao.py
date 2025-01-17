@@ -1,4 +1,4 @@
-from src import dbsingleton
+from src.database import dbsingleton
 
 class ClientDAO:
 	def __init__(self, id, address_id, first_name, last_name, email, client_number):

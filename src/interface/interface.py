@@ -1,4 +1,4 @@
-from src import clientinterface, bankinterface, accountinterface, transactioninterface
+from src.interface import clientinterface, bankinterface, accountinterface, transactioninterface
 
 class Interface:
 	def __init__(self):

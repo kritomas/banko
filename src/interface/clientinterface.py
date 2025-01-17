@@ -1,6 +1,6 @@
-from src import bank
+from src.application import client
 
-class BankInterface:
+class ClientInterface:
 	def __init__(self):
 		self.active = True
 
@@ -17,41 +17,44 @@ class BankInterface:
 	def help(self):
 		print("help: Display this")
 		print("exit: Exit")
-		print("register: Register new bank")
-		print("list: List all banks")
-		print("report: List all banks with their total balances accross all accounts")
-		print("import: Import banks from a CSV file")
+		print("register: Register new client")
+		print("list: List all clients")
+		print("report: List all clients with their total balances accross all accounts")
+		print("import: Import clients from a CSV file")
 	def register(self):
-		print("Registering new bank...")
+		print("Registering new client...")
+		first_name = input("First name: ")
+		last_name = input("Last name: ")
+		email = input("Email: ")
 		city = input("City: ")
 		street = input("Street: ")
 		house_number = input("House number: ")
 		additional = input("Additional address info (can be blank): ")
 		if additional == "":
 			additional = None
-		b = bank.Bank.register(city, street, house_number, additional)
-		print("Registered new bank with number", b.bank_number)
+		c = client.Client.register(first_name, last_name, email, city, street, house_number, additional)
+		print("Registered new client with number", c.client_number)
 	def list(self):
-		banks = bank.Bank.list()
-		for b in banks:
-			print(b)
+		clients = client.Client.list()
+		for c in clients:
+			print(c)
 	def report(self):
-		report = bank.Bank.report()
+		report = client.Client.report()
 		for r in report:
 			print(r)
 	def importCSV(self):
-		print("Importing banks from CSV...")
+		print("Importing clients from CSV...")
 		filepath = input("Filepath: ")
-		c = bank.Bank.importCSV(filepath)
-		print("Imported", c, "banks")
+		c = client.Client.importCSV(filepath)
+		print("Imported", c, "clients")
 
 	def start(self):
 		self.active = True
-		print("Bank manager")
+		print("Client manager")
 		print("Enter \"help\" to get started ;)")
 		while self.active:
 			try:
-				cmd = input("bank: ")
+				cmd = input("client: ")
 				if cmd in self.commands:
 					self.commands[cmd]()
 				else:
