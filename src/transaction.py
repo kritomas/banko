@@ -1,4 +1,4 @@
-import random, datetime, decimal, threading
+import random, datetime, decimal, threading, time
 from src import transactiondao, accountdao, dbsingleton
 class Transaction:
 	def __init__(self, transactiondao, fromdao, todao):
@@ -37,6 +37,7 @@ class Transaction:
 		t.start()
 		account = accountdao.AccountDAO.readByAccountNumber(from_number, cursor)
 		print("Account balance before: " + str(account.balance) + "$")
+		time.sleep(0.1) # Induce non-repeatable reads
 		account = accountdao.AccountDAO.readByAccountNumber(from_number, cursor)
 		print("Account balance after: " + str(account.balance) + "$")
 		cursor.execute("commit")

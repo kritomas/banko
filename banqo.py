@@ -1,6 +1,12 @@
 import sys
 
 try:
+	import mysql.connector
+except Exception as error:
+	print("Error: Module `mysql-connector-python` not installed")
+	sys.exit(-1)
+
+try:
 	from src import config
 except Exception as error:
 	print("Config loading failed:", error)

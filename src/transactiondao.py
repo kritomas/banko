@@ -1,5 +1,5 @@
+import datetime, decimal, time
 from src import dbsingleton
-import datetime, decimal
 
 class TransactionDAO:
 	def __init__(self, id, from_id, to_id, created_on, amount, notes = None):
@@ -118,4 +118,5 @@ class TransactionDAO:
 		values = (from_number, to_number, amount, notes)
 		if cursor == None:
 			cursor = dbsingleton.DBSingleton().cursor()
+		time.sleep(0.05) # Induce non-repeatable reads
 		cursor.execute(sql, values)
