@@ -15,3 +15,5 @@ This application allows you to manage the finances of a fictional banking system
 Simply run `python3 banqo.py` to get started.
 
 See also: `doc/USAGE.md`
+
+Source code: https://github.com/kritomas/banqo
